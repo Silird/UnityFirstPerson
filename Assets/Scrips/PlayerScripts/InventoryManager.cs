@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static event Action<Tool> ToolChanged;
-    public void EquipItem(string itemName)
+    public Tool EquipItem(string itemName)
     {
         var item = ItemManager.Instance.Get(itemName);
         var newItem = Instantiate(item);
@@ -19,6 +19,10 @@ public class InventoryManager : MonoBehaviour
                     ToolChanged.Invoke(tool);
                 }
             }
+
+            return tool;
         }
+
+        return null;
     }
 }

@@ -165,9 +165,9 @@ MonoBehaviour:
   gripPosition: {x: 0.0184, y: -0.0074, z: 0.0163}
   gripRotation: {x: 0, y: -12.16, z: 0}
   mainTool: 1
-  SIGHT_MIN: 20
-  SIGHT_MAX: 100
-  AIM_SPEED: 50
+  sightMin: 20
+  sightMax: 100
+  aimSpeed: 50
 --- !u!1 &6592327281014603313
 GameObject:
   m_ObjectHideFlags: 0

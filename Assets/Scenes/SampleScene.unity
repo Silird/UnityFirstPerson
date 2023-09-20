@@ -3155,6 +3155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 2
+  runningSpeed: 25
   gravity: -9.8
 --- !u!114 &1480624646
 MonoBehaviour:

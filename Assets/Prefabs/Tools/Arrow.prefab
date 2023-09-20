@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1450153106049238993}
   - component: {fileID: 7877711095445494960}
   - component: {fileID: 3751004494593914857}
-  - component: {fileID: 3539369195587034768}
+  - component: {fileID: 6830736618545372654}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 568036627037906997, guid: 4fa68e0d267fb454bafd0a157c2526ce, type: 3}
---- !u!114 &3539369195587034768
+--- !u!114 &6830736618545372654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,10 +116,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2003137426749147482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4731c0012952c6b4d9c57e7404d4d31d, type: 3}
+  m_Script: {fileID: 11500000, guid: cd07f8dea5551d54481af59e27f77b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
   gripPosition: {x: 0.0056, y: -0.0146, z: 0.0032}
   gripRotation: {x: 0, y: 0, z: 90}
   mainTool: 0
+  baseSpeed: 60

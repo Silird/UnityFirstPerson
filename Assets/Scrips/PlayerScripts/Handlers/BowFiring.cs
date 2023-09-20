@@ -7,8 +7,10 @@ public class BowFiring : ToolHandler
 {
     private bool _startAim;
     private float _sightSize;
+    private float _force;
 
     private Bow _equippedBow;
+    private Arrow _equippedArrow;
 
     //Объект камеры
     private Camera _camera;
@@ -71,10 +73,12 @@ public class BowFiring : ToolHandler
             // Изменение прицела
             _sightSize -= _equippedBow.aimSpeed * Time.deltaTime;
             _sightSize = Mathf.Max(_sightSize, _equippedBow.sightMin);
+            _force = Math.Abs(_equippedBow.sightMax - _sightSize) /
+                     Math.Abs(_equippedBow.sightMax - _equippedBow.sightMin);
         }
         else
         {
-            _inventoryManager.EquipItem("Arrow");
+            _equippedArrow = _inventoryManager.EquipItem("Arrow") as Arrow;
             AudioManager.Instance.Play("Arrow Pullback", gameObject);
 
             // Старт анимации
@@ -84,6 +88,7 @@ public class BowFiring : ToolHandler
 
             // Старт прицела
             _sightSize = _equippedBow.sightMax;
+            _force = 0;
         }
         // Применение нового прицела
         UIManager.Instance.SetSightSize(_sightSize);
@@ -93,18 +98,27 @@ public class BowFiring : ToolHandler
     {
         var ray = GetHitRay();
 
+        Vector3 destination;
         //Если попали в какой то объект
         if (Physics.Raycast(ray, out var hit))//пускаем луч ray результат столкновения считываем в hit
         {
+            destination = hit.point;
+            
             //Распознавание попаданий в цель
             // GameObject hitObject = hit.transform.gameObject;//получаем объект, в который попали
 
             //запускаем сопрограмму
-            StartCoroutine(SphereIndicatorCoroutine(hit, ray));
+            // StartCoroutine(SphereIndicatorCoroutine(hit, ray));
             //рисуем отладочную линию, чтобы проследить траекторию луча
-            Debug.DrawLine(this.transform.position, hit.point, Color.green, 2);
+            // Debug.DrawLine(transform.position, hit.point, Color.green, 2);
 
         }
+        else
+        {
+            destination = ray.GetPoint(100);
+        }
+        
+        _equippedArrow.Shoot(_equippedBow, destination, _force);
 
         _startAim = false;
         _animator.SetBool(AnimAim, false);

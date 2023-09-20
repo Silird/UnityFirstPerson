@@ -4,7 +4,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField]
     public float walkingSpeed = 6.0f;
-    // public float runningSpeed = 25.0f;
+    public float runningSpeed = 25.0f;
     public float gravity = -9.8f;
 
     private CharacterController _characterController;
@@ -32,19 +32,29 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        float speed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = runningSpeed;
+        }
+        else
+        {
+            speed = walkingSpeed;
+        }
+
         var deltaX = Input.GetAxis("Horizontal");
         var deltaZ = Input.GetAxis("Vertical");
 
         _animator.SetFloat(Horizontal, deltaX);
         _animator.SetFloat(Vertical, deltaZ);
 
-        deltaX *= walkingSpeed;
-        deltaZ *= walkingSpeed;
+        deltaX *= speed;
+        deltaZ *= speed;
 
 
 
         var movement = new Vector3(deltaX, 0, deltaZ);
-          movement = Vector3.ClampMagnitude(movement, walkingSpeed);
+          movement = Vector3.ClampMagnitude(movement, speed);
 
 
         if (movement == Vector3.zero)
